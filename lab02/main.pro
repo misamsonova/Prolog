@@ -1,5 +1,5 @@
 ﻿implement main
-    open core, stdio
+    open core, file, stdio
 
 domains
     naselenie = integer.
@@ -7,46 +7,11 @@ domains
     stolica = string.
     gender = string.
 
-class facts
+class facts - information
     gos : (integer Id_gos, string Gosudarstvo, string Chast_sveta, integer Naselenie, integer Ploschad).
     stol : (integer Id_stol, string Stolica, integer Naselenie, integer Ploschad).
     pred : (integer Id_stol, integer Id_gos).
     gender_gos : (gosudarstvo Q, stolica W, gender E, naselenie R).
-
-clauses
-    gos(276, "German", "Europe", 84, 357588).
-    gos(250, "France", "Europe", 68, 551695).
-    gos(156, "China", "Asia", 1500, 9597000).
-    gos(392, "Japan", "Asia", 126, 377973).
-    gos(124, "Canada", "America", 39, 9985000).
-    gos(076, "Argentina", "America", 215, 2780000).
-
-    stol(0, "Berlin", 4, 892).
-    stol(1, "Tokio", 14, 2194).
-    stol(2, "Ottawa", 1, 2790).
-    stol(3, "Paris", 3, 105).
-    stol(4, "Beijing", 22, 16411).
-    stol(5, "Buenos Aires", 3, 203).
-
-    pred(0, 276).
-    pred(1, 392).
-    pred(2, 124).
-    pred(3, 250).
-    pred(4, 156).
-    pred(5, 076).
-
-    gender_gos("German", "Berlin", "Male", 41100721).
-    gender_gos("German", "Berlin", "Female", 42708704).
-    gender_gos("France", "Paris", "Male", 32165751).
-    gender_gos("France", "Paris", "Female", 33920457).
-    gender_gos("China", "Beijing", "Male", 722000006).
-    gender_gos("China", "Beijing", "Female", 689000069).
-    gender_gos("Japan", "Tokyo", "Male", 61473601).
-    gender_gos("Japan", "Tokyo", "Female", 64745856).
-    gender_gos("Argentina", "Buenos Aire", "Male", 22790322).
-    gender_gos("Argentina", "Buenos Aire", "Female", 23798672).
-    gender_gos("Canada", "Ottawa", "Male", 19288225).
-    gender_gos("Canada", "Ottawa", "Female", 19528177).
 
 class predicates
     printGos : (). /*Вывод всех государств с их id, названием, столицей, населением и площадью.*/
@@ -146,6 +111,8 @@ clauses
 
 clauses
     run() :-
+        console::init(),
+        reconsult("..\\information.txt", information),
         write(" Basic information about countries:\n"),
         printGos(),
         write(" \n"),
