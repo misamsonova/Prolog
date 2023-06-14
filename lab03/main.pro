@@ -1,4 +1,4 @@
-﻿implement main
+implement main
     open core, file, stdio
     domains
         naselenie = integer.
@@ -6,6 +6,8 @@
         stolica = string.
         chast_sveta = string.
         gender = symbol.
+        list = string*.
+
     class facts - information
         gos : (integer Id_gos, string Gosudarstvo, chast_sveta Chast_sveta, integer Naselenie, integer Ploschad).
         stol : (integer Id_stol, string Stolica, integer Naselenie, integer Ploschad).
@@ -15,15 +17,15 @@
         printGos : (). % Вывод всех государств с их id, названием, столицей, населением и площадью.
         printStol : (). % Вывод всех столиц с их id, названием, населением и площадью.
         printPred : (). % Вывод всех id государств и  id их столиц.
-        zchsv : (chast_sveta, list (string)). % Вывод всех государств по заданной части света.
+        zchsv : (chast_sveta, list). % Вывод всех государств по заданной части света.
         zidst : (integer, chast_sveta). % Вывод части света по id столицы их государства.
         sootn : (). % Рассчёт соотношения площадей столицы к принадлежащему государству.
         printGender_gos : (). % Вывод государств с количеством мужского и женского населения
         increaseNaselenie : (string, integer). % Увеличение числа населения определённого государства.
         decreaseNaselenie : (string, integer). % Уменьшение числа населения определённого государства.
-        sumNaselenie : (list(string), naselenie). % Вычисление общего населения выбранных государств
-        maxNaselenie : (list(string), naselenie). % Вычисление максимального населения выбранных государств
-        minNaselenie : (list(string), naselenie). % Вычисление минимального населения выбранных государств
+        sumNaselenie : (list, naselenie). % Вычисление общего населения выбранных государств
+        maxNaselenie : (list, naselenie). % Вычисление максимального населения выбранных государств
+        minNaselenie : (list, naselenie). % Вычисление минимального населения выбранных государств
     clauses
         printGender_gos() :-
             gender_gos(Q, W, E, R),
